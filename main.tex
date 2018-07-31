@@ -34,9 +34,51 @@
 % \DeclareCaptionFont{normalsize}{\normalsize}
 % \captionsetup{font=normalsize}
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Use the confposter theme supplied with this template
 \usetheme{confposter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{headline}{  
+  \leavevmode
+
+  \begin{beamercolorbox}[wd=\paperwidth]{headline}
+    \begin{columns}[T]
+      \begin{column}{.02\paperwidth}
+      \end{column}
+      \begin{column}{.18\paperwidth}
+\includegraphics[width=10cm,keepaspectratio]{dbgrouplogo.pdf}~%
+    \includegraphics[width=10cm,keepaspectratio]{hexsalablogo.pdf}%
+        \vskip1ex
+      \end{column}
+      \begin{column}{.6\paperwidth}
+        \vskip4ex
+        \centering
+        \usebeamercolor{title in headline}{\color{fg}\textbf{\veryHuge{\inserttitle}}\\[1ex]}
+        \usebeamercolor{author in headline}{\color{fg}\huge{\insertauthor}\\[1ex]}
+        \usebeamercolor{institute in headline}{\color{fg}\large{\insertinstitute}\\[1ex]}     
+      \end{column}
+            \begin{column}{.02\paperwidth}
+      \end{column}
+      \begin{column}{.18\paperwidth}
+        \vskip2cm
+        \begin{center}
+          \raggedright
+          \includegraphics[width=.9\linewidth]{iit_logo.png}
+        \end{center}
+        \vskip1.5cm
+      \end{column}
+    \end{columns}
+  \end{beamercolorbox}
+
+   \vspace{0.5in}
+ \hspace{0.5in}\begin{beamercolorbox}[wd=1\linewidth,colsep=0.15cm]{cboxb}\end{beamercolorbox}
+ \vspace{-0.5in}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COLORS
@@ -96,7 +138,7 @@
 
 \newcommand{\todo}[1]{\textbf{\textcolor{red}{TODO: #1}}}
 
-\title{NautDB: Towards a Hybrid Runtime for Processing Compiled Queries}
+\title{\emph{NautDB}: Towards a Hybrid Runtime for Processing Compiled Queries}
 
 % \author{\texorpdfstring{
 % \begin{columns}
@@ -123,24 +165,21 @@
 %       %   bglavic@cs.iit.edu
 % \end{columns}
 % }{}}
-\author{\vspace{-4cm}Samuel Grayson\textsuperscript{1}, Kyle
-  Hale\textsuperscript{2}, Boris Glavic\textsuperscript{2} \\}
+\author{Samuel Grayson\textsuperscript{1}, Kyle
+  Hale\textsuperscript{2}, Boris Glavic\textsuperscript{2}}
 
 % TODO: put emails on here
 \institute{1 University of Texas at Dallas, 2 Illinois Insitute of Technology}
 
 \graphicspath{{./imgs/}}
 
-% LOGOS
-\logo{%
-    \includegraphics[width=10cm,keepaspectratio]{dbgrouplogo.pdf}~%
-    \includegraphics[width=10cm,keepaspectratio]{hexsalablogo.pdf}%
-}
 
 
 
-\newmdenv[linewidth=10pt,innerlinewidth=0.5pt, roundcorner=40pt,linecolor=mycolor,innerleftmargin=26pt,
-innerrightmargin=26pt,innertopmargin=26pt,innerbottommargin=26pt]{mybox}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OVERVIEW BOX
+\newmdenv[linewidth=10pt,innerlinewidth=0.5pt, roundcorner=40pt,linecolor=mylinecolor,innerleftmargin=26pt,
+innerrightmargin=26pt,innertopmargin=26pt,innerbottommargin=26pt]{overviewbox}
 
 
 % ----------------------------------------------------------------------------------------
