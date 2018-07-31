@@ -1,14 +1,14 @@
 LATEX = pdflatex
 TEX_TARGET = main
 BIBTEX = bibtex
+FIGURES = plots/malloc.png
 
 all: $(TEX_TARGET).pdf
 
-malloc.png: ~/data/comparing_malloc_performance.py ~/data/graph_2d.py
-	cd ~/data && python3 comparing_malloc_performance.py
-	mv ~/data/malloc.png ./
+plots/malloc.png: ./plots/comparing_malloc_performance.py
+	python3 $<
 
-main.pdf: $(TEX_TARGET).tex *.tex
+main.pdf: $(TEX_TARGET).tex *.tex $(FIGURES)
 	$(LATEX) $(TEX_TARGET).tex
 
 bib: 
@@ -21,6 +21,9 @@ bib:
 clean:
 	rm -f $(TEX_TARGET).pdf *.aux *.log *.out *.bbl *.blg
 
-.PHONY: clean
+clean_figures:
+	rm -f $(FIGURES)
+
+.PHONY: clean clean_figures
 	
 

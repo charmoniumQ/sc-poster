@@ -5,3 +5,5 @@ auto/
 *.toc
 *.snm
 *.out
+__pycache__/
+*.pyc
