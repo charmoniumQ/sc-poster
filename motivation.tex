@@ -1,33 +1,31 @@
 \begin{block}{Motivation}
 
-  The goal of this research is to integrate the improvements
-  specialized systems (unikernels) with the improvements in
-  specialized DB (compiled queries) to achieve high-performance.
 
+
+
+\underline{\textbf{Status quo}}
   \begin{itemize}
-  \item Status quo
-    \begin{itemize}
-    \item Too many abstractions makes high-performance difficult.
-    \item OS is not aware of the workload; app-programmer is.
-    \item DB systems already have specialized scheduling abstraction, mem. management abstraction.
-    \item \alert{Give up the flexibility and generality in exchange for performance.}
+    \item Too many abstractions $\implies$ high-performance is difficult to achieve
+    \item General purpose OS are not aware of the workload; app-programmer is.
+    \item DBs already use specialized scheduling and memory management abstractions.
     \end{itemize}
-
-  \item Specialized Hybrid Runtime
+ \alert{\textbf{Solution:} Give up flexibility and generality in exchange for performance.}\\[7mm]
+    
+\underline{\textbf{Specialized Hybrid Runtimes}}
     \begin{itemize}
     \item Kernel + Dataflow Runtime run in ring 0 (unikernel-like).
-    \item Advances in multi-kernel environments allow physical \todo{(cite pisces)} resources to be split between a full-weight kernel and our specialized runtime.
+    \item Advances in multi-kernel environments allow physical \todo{(cite pisces)} resources to be split between a full-weight kernel and a hybrid runtime.
       % \item \alert{Unikernel-inspired design prevents the OS from `getting in the way' of the app-programmer.}
     \item {Unikernel-inspired design allows the app-programmer fine-grained control over the execution environment.}
       \begin{itemize}
       \item Control over scheduling $\implies$ no context-switches.
       \item Control over OS $\implies$ avoid interrupts $\implies$ faster and more predictable.
       \item No virtual memory $\implies$ huge page-sizes (1Gb) $\implies$ no TLB misses.
-      \item Control over memory $\implies$ specialize memory-allocator for workload (by app-programmer). See Fig \ref{fig:1}
+      \item Control over memory $\implies$ specialize memory-allocator for workload/application (see Fig.~ \ref{fig:1})
       \end{itemize}
     \end{itemize}
 
-  \item Compiled Queries
+    \underline{\textbf{Compiled Query Processing}}
     \begin{itemize}
     \item Could be pre-compiled or JIT-compiled.
     \item {The app-programmer writes compiled code in the unikernel, giving them unfettered access HW.}
@@ -36,10 +34,8 @@
       \item Control HW $\implies$ NUMA-aware code.
       \end{itemize}
     \end{itemize}
-
-  \end{itemize}
-
 \end{block}
+
 
 %%% Local Variables:
 %%% mode: latex

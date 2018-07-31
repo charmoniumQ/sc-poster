@@ -29,6 +29,11 @@
 \documentclass[final]{beamer}
 \usepackage{graphicx}
 \usepackage{enumitem}
+\usepackage[framemethod=tikz]{mdframed}
+% \usepackage[font=normalsize, justification=centering]{caption}
+% \DeclareCaptionFont{normalsize}{\normalsize}
+% \captionsetup{font=normalsize}
+
 
 % Use the confposter theme supplied with this template
 \usetheme{confposter}
@@ -86,7 +91,7 @@
 
 \newcommand{\todo}[1]{\textbf{\textcolor{red}{TODO: #1}}}
 
-\title{NautDB: Towards a Hybrid Runtime for Query Processing}
+\title{NautDB: Towards a Hybrid Runtime for Processing Compiled Queries}
 
 % \author{\texorpdfstring{
 % \begin{columns}
@@ -119,8 +124,21 @@
 % TODO: put emails on here
 \institute{1 University of Texas at Dallas, 2 Illinois Insitute of Technology}
 
-% ----------------------------------------------------------------------------------------
+\graphicspath{{./imgs/}}
 
+% LOGOS
+\logo{%
+    \includegraphics[width=10cm,keepaspectratio]{dbgrouplogo.pdf}~%
+    \includegraphics[width=10cm,keepaspectratio]{hexsalablogo.pdf}%
+}
+
+\definecolor{mycolor}{rgb}{0.122, 0.435, 0.698}
+
+\newmdenv[linewidth=10pt,innerlinewidth=0.5pt, roundcorner=40pt,linecolor=mycolor,innerleftmargin=26pt,
+innerrightmargin=26pt,innertopmargin=26pt,innerbottommargin=26pt]{mybox}
+
+
+% ----------------------------------------------------------------------------------------
 \begin{document}
 
 \begin{frame}[t] % The whole poster is enclosed in one beamer frame
@@ -146,8 +164,9 @@
       \begin{figure}
         \includegraphics[height=30cm]{malloc.png}
         \label{fig:1}
-        \textrm{\caption{An alternative memory allocator can have a better performance for certain workloads.}}
+        \caption{Performance of allocating memory in chunks comparing linux against a custom memory allocator in Nautilus. Using specialization the custom allocator outperforms the highly optimized memory allocator of linux for smaller sizes by more than an order of magnitude. This demonstrates the potential of specialization - the behaviour of a component can be fine-tuned to workload characteristics.}
       \end{figure}
+      \input{vision.tex}
       \input{previous_work.tex}
       \input{testing_prototype.tex}
     \end{column}
