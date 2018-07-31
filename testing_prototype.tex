@@ -1,8 +1,12 @@
-\begin{block}{Testing prototype}
+\begin{block}{Testing Prototype}
   \begin{itemize}
-  \item in-memory, columnar, chunk-oriented operators
-  \item embedded in Nautilus or as application in Linux
-  \item 16-core x86\_64 AMD EPYC with 4 NUMA nodes
+  \item Hand-optimized, in-memory, columnar, chunk-oriented operator implementations
+    \begin{itemize}
+    \item sorting, selection (filter), creating tables
+    \end{itemize}
+  \item Basic array operations: allocate, 
+  \item Embedded in Nautilus~\cite{HALE:2015:NAUTILUS} or as application in Linux
+  \item Test hardware: 16-core x86\_64 AMD EPYC with 4 NUMA nodes
  \item \todo{version of linux kernel}
   \end{itemize}
 \end{block}
