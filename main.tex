@@ -1,0 +1,186 @@
+% https://www.overleaf.com/18225217jqvtscscccvs#/68889822/
+% https://www.overleaf.com/18225348jztrfnwtzspz#/68890238/
+% https://www.overleaf.com/read/hprgdrpcvvpm#/32910503/
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Jacobs Portrait Poster
+% LaTeX Template
+% Version 1.0 (31/08/2015)
+% (Based on Version 1.0 (29/03/13) of the landscape template
+% 
+% Created by:
+% Computational Physics and Biophysics Group, Jacobs University
+% https://teamwork.jacobs-university.de:8443/confluence/display/CoPandBiG/LaTeX+Poster
+% 
+% Further modified by:
+% Nathaniel Johnston (nathaniel@njohnston.ca)
+% 
+% Portrait version by:
+% John Hammersley
+% 
+% The landscape version of this template was downloaded from:
+% http://www.LaTeXTemplates.com
+% 
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\documentclass[final]{beamer}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+% Use the confposter theme supplied with this template
+\usetheme{confposter}
+
+% color styles
+% Many more colors are available for use in beamerthemeconfposter.sty
+% \setbeamercolor{block title}{fg=ngreen,bg=white}
+% \setbeamercolor{block body}{fg=black,bg=white}
+% \setbeamercolor{block alerted title}{fg=white,bg=dblue!70}
+% \setbeamercolor{block alerted body}{fg=black,bg=dblue!10}
+
+% \addtobeamertemplate{block begin}{\pgfsetfillopacity{0.0}}{\pgfsetfillopacity{1}}
+
+% \usebackgroundtemplate{
+% \begin{tikzpicture}
+%   \path [outer color = green!10, inner color = blue!10]
+%   (0,0) rectangle (\paperwidth,\paperheight);
+% \end{tikzpicture}}
+
+% Use the beamerposter package for laying out the poster (cm)
+% https://github.com/deselaers/latex-beamerposter/blob/master/beamerposter.sty#L138
+\usepackage[scale=1.6, size=custom, width=240, height=120]{beamerposter}
+
+% Define the column widths and overall poster size
+
+% To set effective sepwid, onecolwid and twocolwid values, first choose how many columns you want and how much separation you want between columns
+% In this template, the separation width chosen is 0.024 of the paper width and a 4-column layout
+% onecolwid should therefore be (1-(# of columns+1)*sepwid)/# of columns e.g. (1-(4+1)*0.024)/4 = 0.22
+% Set twocolwid to be (2*onecolwid)+sepwid = 0.464
+% Set threecolwid to be (3*onecolwid)+2*sepwid = 0.708
+\newlength{\sepwid}
+\newlength{\onecolwid}
+\newlength{\twocolwid}
+\newlength{\threecolwid}
+\setlength{\paperwidth}{240cm}
+\setlength{\paperheight}{120cm}
+\setlength{\sepwid}{0.015\paperwidth} % Separation width (white space) between columns
+\setlength{\onecolwid}{0.22\paperwidth} % Width of one column
+\setlength{\twocolwid}{0.625\paperwidth} % Width of two columns
+\setlength{\threecolwid}{0.90\paperwidth} % Width of three columns
+\setlength{\topmargin}{-1in} % Reduce the top margin size
+
+\addtobeamertemplate{block end}{}{\vspace*{2ex}} % White space under blocks
+\addtobeamertemplate{block alerted end}{}{\vspace*{2ex}} % White space under highlighted (alert) blocks
+
+\setlength{\belowcaptionskip}{2ex} % White space under figures
+\setlength\belowdisplayshortskip{2ex} % White space under equations
+
+\newcommand{\samelineand}{\qquad}
+
+% http://mirror.hmc.edu/ctan/macros/latex/contrib/enumitem/enumitem.pdf
+\setlist[itemize]{label=\textbullet,leftmargin=1.5cm}
+\setlist[itemize,1]{itemsep=0.8cm}
+\setlist[itemize,2]{itemsep=0.2cm}
+
+\newcommand{\todo}[1]{\textbf{\textcolor{red}{TODO: #1}}}
+
+\title{NautDB: Towards a Hybrid Runtime for Query Processing}
+
+% \author{\texorpdfstring{
+% \begin{columns}
+%   \column{0.33\linewidth}
+%   \centering
+
+%   \textbf{Samuel Grayson}\\[0.75ex]
+%   Computer Science Department\\
+%   University of Texas at Dallas\\
+%       %   samuel.grayson@utdallas.edu
+
+%   \column{0.33\linewidth}
+%   \centering
+%   \textbf{Kyle Hale}\\[0.5ex]
+%   Computer Science Department\\
+%   Illinois Institute of Technology\\
+%       %   khale@cs.iit.edu
+
+%   \column{0.3\linewidth}
+%   \centering
+%   \textbf{Boris Glavic}\\[0.75ex]
+%   Computer Science Department\\
+%   Illinois Institute of Technology\\
+%       %   bglavic@cs.iit.edu
+% \end{columns}
+% }{}}
+\author{\vspace{-4cm}Samuel Grayson\textsuperscript{1}, Kyle
+  Hale\textsuperscript{2}, Boris Glavic\textsuperscript{2} \\}
+
+% TODO: put emails on here
+\institute{1 University of Texas at Dallas, 2 Illinois Insitute of Technology}
+
+% ----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\begin{frame}[t] % The whole poster is enclosed in one beamer frame
+
+  \begin{columns}[t]
+
+    % spacer column
+    \begin{column}{\sepwid}
+    \end{column}
+
+    % column 1
+    \begin{column}{\onecolwid}
+      \input{abstract.tex}
+      \input{motivation.tex}
+    \end{column}
+
+    % spacer column
+    \begin{column}{\sepwid}
+    \end{column}
+
+    % column 2
+    \begin{column}{\onecolwid}
+      \begin{figure}
+        \includegraphics[height=30cm]{malloc.png}
+        \label{fig:1}
+        \textrm{\caption{An alternative memory allocator can have a better performance for certain workloads.}}
+      \end{figure}
+      \input{previous_work.tex}
+      \input{testing_prototype.tex}
+    \end{column}
+
+    % spacer column
+    \begin{column}{\sepwid}
+    \end{column}
+
+    % column 3
+    \begin{column}{\onecolwid}
+      \input{preliminary_results_I.tex}
+      \input{preliminary_results_II.tex}
+    \end{column}
+
+    % spacer column
+    \begin{column}{\sepwid}
+    \end{column}
+
+    % column 4
+    \begin{column}{\onecolwid}
+      \input{discussion.tex}
+      \input{future_work.tex}
+      \input{conclusion.tex}
+      \input{references.tex}
+    \end{column}
+    
+  \end{columns}
+  
+\end{frame}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

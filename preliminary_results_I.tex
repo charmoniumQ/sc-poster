@@ -1,0 +1,29 @@
+\begin{block}{Preliminary results I}
+  Basic array operations (within a chunk) perform better in the specialized runtime.
+
+  \begin{figure}
+    \includegraphics[height=20cm]{place_holder.png}
+    \caption{Nautilus can reverse an array faster.}
+  \end{figure}
+
+  \begin{table}
+    \begin{tabular}{l || c c | c c}
+      Operation & Linux & & Nautilus & \\
+      \hline\hline
+      Allocate & 1.0e9 & 1.0x & 1.0e9 & 1.0x \\\hline
+      Free & 1.0e9 & 1.0x & 1.0e9 & 1.0x \\\hline
+      Copy (\texttt{memcpy}) & 1.0e9 & 1.0x & 1.0e9 & 1.0x \\\hline
+      Copy (individually) & 1.0e9 & 1.0x & 1.0e9 & 1.0x \\\hline
+      Reverse & 1.0e9 & 1.0x & 1.0e9 & 1.0x \\
+    \end{tabular}
+
+    Runtime measured in cycles according to \texttt{rdtsc}.
+
+    \caption{Performance of Linux vs Nautilus on basic array operations averaged over 10 runs.}
+  \end{table}
+  
+\end{block}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
