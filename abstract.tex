@@ -8,7 +8,7 @@
       (unikernels) and  DB community (compiled queries) for high-performance query processing.}
 \end{overviewbox}
   \begin{itemize}
-  \item   With the explosion of ``big data'', executing queries on vast amounts of data in parallel has become a bottleneck in many HPC systems and beyond.
+  \item   With the explosion of ``big data'', executing queries on vast amounts of data in parallel has become a bottleneck in many HPC systems.
   \item   Complex multi-layered abstractions behind generic interfaces in the traditional OS and database software stack are getting in the way of exploiting the characteristics of modern multi-core systems to maximize performance.
   \item   To mitigate this inefficiency, we envision \textbf{NautDB}, a \textbf{hybrid runtime kernel} (based on the \textbf{Nautilus Aerokernel}~\cite{HALE:2015:NAUTILUS}) for the parallel execution of \textbf{compiled queries}, thus, combining for the first time the concepts of hybrid runtimes and compiled query processing developed by the operating system and database communities.
   \item   We implement a \textbf{testing prototype} to evaluate the potential performance benefits that can be achieved by our specialized hybrid runtime against a general-purpose runtime, for which Linux will serve as our exemplar.

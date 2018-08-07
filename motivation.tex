@@ -1,43 +1,54 @@
 \begin{block}{Motivation and Background}
 
-
-
-
 \underline{\textbf{Status quo}}
   \begin{itemize}
   \item General purpose OS and DBs% not aware of the workload; app-programmer is.
+  \item The same general prupose OS kernel and write application code at user-level.
+    \begin{itemize}
+    \item layer of abstraction over HW, makes it hard to extract maximal performance
+    \item not workload aware; it optimizes for the general case, but not necessarily our specific case.
+    \end{itemize}
+ 
+  \item Time-sharing kernel.
     \begin{itemize}
     \item broad interface for generality
     \item high-level abstractions for programmability
+    \item context-switches, scheduling interrupts, and thread-migration
     \end{itemize}
 %      use specialized scheduling and memory management abstractions.
  %   \item DBs suffer from over lack of specialization
     \item Too many abstractions $\implies$ high-performance is difficult to achieve
+  
+  \item Queries composed at runtime.
+    \begin{itemize}
+    \item Deep function-call trees.
+    \item Poor spacial locality in instruction memory
     \end{itemize}
-    \begin{center}
- \alert{\textbf{Solution:} Give up flexibility and generality in exchange for performance}
-\end{center}
-%\\[7mm]
-    
-\underline{\textbf{Specialized Hybrid Runtimes}}
+  \end{itemize}
+
+  \begin{center}
+    \alert{\textbf{Solution:} Give up flexibility and generality in exchange for performance}
+  \end{center}
+   
+  \underline{\textbf{Specialized Hybrid Runtimes}}
     \begin{itemize}
     \item Kernel + Dataflow Runtime run in ring 0 (unikernel-like).
-    \item Resources can be split between general purpose OS and hybrid runtime
+    \item Physical resources can be partitioned between general purpose OS and hybrid runtime\cite{KOCOLOSKI:2015:PISCES}.
       \begin{itemize}
-      \item $\implies$ can use general purpose OS where needed
-    \end{itemize}
+      \item $\implies$ can call general purpose OS where needed.
+      \end{itemize}
 
       % Advances in multi-kernel environments allow physical \todo{(cite pisces)} resources to be split between a full-weight kernel and a hybrid runtime.
       % \item \alert{Unikernel-inspired design prevents the OS from `getting in the way' of the app-programmer.}
     \item {Unikernel-inspired design gives programmer fine-grained control over \ldots}
       \begin{itemize}
-      \item scheduling $\implies$ no context-switches
-      \item OS $\implies$ avoid interrupts $\implies$ faster and more predictable
-      \item No virtual memory $\implies$ huge page-sizes (1Gb) $\implies$ no TLB misses.
-      \item memory allocation $\implies$ specialize allocator for workload/application (see Fig.~ \ref{fig:1})
+      \item Not time-shared $\implies$ No context-switches or thread-migration.
+      \item Avoid interrupts $\implies$ faster and more predictable
+      \item Single address space $\implies$ huge page-sizes (1Gb) $\implies$ no TLB misses.
+      \item Memory allocation $\implies$ specialize allocator for workload/application (see Fig.~ \ref{fig:1})
       \end{itemize}
     \end{itemize}
-
+  
     \underline{\textbf{Compiled Query Processing}}
     \begin{itemize}
     \item DB engine is specialized for a particular query
