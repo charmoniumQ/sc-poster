@@ -5,14 +5,15 @@
     \begin{itemize}
     \item Specialization allows operations to be tuned for a workload/application
     \item Compiled queries that consist of highly-specialized code benefit from a hybrid runtime environment
+    \item Hybrid runtimes have much more predictable performance than general purpose OS $\implies$ also will lead to better performance once we go parallel (e.g., bulk-synchronous model)
     \end{itemize}
-  \item While Linux often outperforms our hybrid runtime, we can remedy this situation by introducing complementary specializations (as demonstrated in Fig.~\ref{fig:1})
+  \item While Linux often outperforms our hybrid runtime, we can remedy this situation by introducing complementary specializations (as demonstrated in Fig.~\ref{fig:1}) and choose them based on the workload
   \end{itemize}
 
-  \todo{
-    Since we are specialized we can improve the performance for specific workloads.
-    If we are not better, we could switch to different customizations (chosen by the application-programmer).
-  }
+  % \todo{
+  %   Since we are specialized we can improve the performance for specific workloads.
+  %   If we are not better, we could switch to different customizations (chosen by the application-programmer).
+  % }
 
 \end{block}
 %%% Local Variables:

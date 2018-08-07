@@ -1,13 +1,23 @@
-\begin{block}{Testing Prototype}
+\begin{block}{Testing Prototype and Experimental Setup}
   \begin{itemize}
-  \item Hand-optimized, in-memory, columnar, chunk-oriented operator implementations
+    \item \textbf{Workload}
+      \begin{itemize}
+      \item Hand-optimized, in-memory, columnar, chunk-oriented operator
+        implementations
     \begin{itemize}
     \item sorting, selection (filter), creating tables
     \end{itemize}
-  \item Basic array operations: allocate, 
-  \item Embedded in Nautilus~\cite{HALE:2015:NAUTILUS} or as application in Linux
-  \item Test hardware: 16-core x86\_64 AMD EPYC with 4 NUMA nodes
- \item \todo{version of linux kernel}
+  \item Basic array operations: allocate, \todo{list others}
+  \end{itemize}
+   \item \textbf{Compared Configurations}
+    \begin{itemize}
+    \item Embedded in Nautilus~\cite{HALE:2015:NAUTILUS} versus as application in Linux 
+    \end{itemize}
+  \item \textbf{Setup}
+    \begin{itemize}
+    \item hardware: 16-core x86\_64 AMD EPYC with 4 NUMA nodes
+    \item OS: linux kernel \todo{version of linux kernel}
+    \end{itemize}
   \end{itemize}
 \end{block}
 %%% Local Variables:
