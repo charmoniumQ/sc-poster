@@ -83,6 +83,6 @@ plt.xticks([0, 5, 10, 15], ['$2^0$\n1', '$2^5$\n32', '$2^{10}$\n1024', '$2^{15}$
 cbar.set_ticks([-1, 0, 1])
 cbar.set_ticklabels(['Linux 10x\nfaster', 'parity', 'Nautilus 10x\nfaster'])
 plt.ylabel('total size')
-plt.title('malloc runtime in Linux vs Nautilus')
+plt.title(r'$\texttt{malloc}$ runtime in Linux vs Nautilus')
 
 plt.savefig('malloc.png', bbox_inches='tight')
