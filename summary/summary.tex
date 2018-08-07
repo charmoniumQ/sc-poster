@@ -1,0 +1,108 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{\emph{NautDB}: Towards a Hybrid Runtime for Processing Compiled Queries
+\thanks{This work was supported by NSF Award \#1640864. Opinions, findings and conclusions expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.}
+}
+
+\author{\IEEEauthorblockN{Samuel Grayson}
+\IEEEauthorblockA{\textit{Department of Computer Science} \\
+\textit{University of Texas at Dallas}\\
+samuel.grayson@utdallas.edu}
+\and
+\IEEEauthorblockN{Kyle Hale}
+\IEEEauthorblockA{\textit{Department of Computer Science} \\
+\textit{Illinois Institute of Technology}\\
+khale@cs.iit.edu}
+\and
+\IEEEauthorblockN{Boris Glavic}
+\IEEEauthorblockA{\textit{Department of Computer Science} \\
+\textit{Illinois Institute of Technology}\\
+bglavic@iit.edu}
+}
+
+\maketitle
+
+\begin{abstract}
+General purpose operating and database system suffer under the load of their generality which makes achieving optimal performance extremely hard, especially on modern hardware.
+The goal of this research is to integrate, for the first time, specialization techniques from the OS community (hybrid runtimes) and DB community (compiled queries) for high-performance query processing on modern hardware. We envision a system called \emph{NautDB}, a hybrid dataflow runtime for executing compiled queries. As a first step towards our goal we evaluate the performance of compiled queries on Linux and run as a \emph{Nautilus} hybrid runtime using a simple prototype.
+Our results demonstrate that combining these specialization techniques has transformative potential for building the next generation (distributed) high-performance query processing systems and big data platforms.
+\end{abstract}
+
+\begin{IEEEkeywords}
+hybrid runtimes, light-weight kernels, compiled query processing, high-performance query processing
+\end{IEEEkeywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+  Both the operating system (OS) and database (DB) communities have strived to build general purpose systems which exhibit reasonable performance for a wide variety of applications and are user friendly.
+  %
+  However, the performance of general purpose operating and database systems suffers from being overly generic and hiding implementation details behind multiple layers of abstraction.
+  %
+Both communities have worked on achieving better performance on modern hardware without sacrificing ease of use. Specifically, OS researcher have introduced hybrid runtimes as a means to give an application more immediate access to hardware and control over OS behavior while database researchers have studied query compilation to specialize a database execution engine to a particular query.
+
+
+The goal of this research is to integrate, for the first time, these specialization techniques from the OS community (hybrid runtimes) and DB community (compiled queries) for high-performance query processing.
+%
+We envision \emph{NautDB}, a hybrid dataflow runtime which executes tasks that are represented as compiled (machine) code. The frontend of NautDB will be a query compiler that translates high-level queries (SQL or another declarative and high-level language) into compiled low-level tasks to be executed by the dataflow runtime. 
+  %
+As a first step towards this goal, we build a testing prototype that uses hand-optimized query operator implementations and use this prototype to evaluate the potential performance benefit of running compiled queries as a hybrid runtime.
+%
+Our preliminary results demonstrate that, even though this first version of our prototype is still quite naive, we can achieve better and more predictable performance through specialization.
+%
+While our prototype based on the \emph{Nautilus} aerokernel does not outperform Linux on all parameter settings, it consistently shows better TLB and instruction cache behavior as well as more consistent performance (predictability). This is even though the  research prototype implementation of OS features in Nautilus has to compete with a mature industrial strength implementation in Linux that has been optimized by a horde of skilled developers over decades. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related Work}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preliminary Evaluation}
+
+As a preliminary assessment of the potential of our idea we have build an initial testing prototype which consists of manually optimized implementations of common database query operators. We then evaluate the performance of this prototype on a standard Linux distribution and as a hybrid runtime embedded into the Nautilus aerokernel. The purpose of this experiment is to evaluate how the highly specialized implementation of OS functionality like, e.g., memory management, and the more immediate control over OS features provided by hybrid runtimes benefit evaluation of compiled, high-performance query plans (like the ones produced by modern query compilers used in main memory database systems~\cite{N11}). 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Testing Prototype}
+\label{sec:testing-prototype}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experimental Setup}
+\label{sec:experimental-setup}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experimental Results}
+\label{sec:experimental-results}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Discussion}
+\label{sec:discussion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Our Vision for NautDB}
+\label{sec:our-vision-nautdb}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions and Future Work}
+\label{sec:concl-future-work}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{References}
+
+  \bibliographystyle{abbrv}
+  \bibliography{../kyle,../sam,../boris}
+
+
+\end{document}
