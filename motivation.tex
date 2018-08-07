@@ -2,27 +2,31 @@
 
 \underline{\textbf{Status quo}}
   \begin{itemize}
-  \item General purpose OS and DBs% not aware of the workload; app-programmer is.
-  \item The same general prupose OS kernel and write application code at user-level.
+  \item \textbf{General purpose OS and DBs}% not aware of the workload; app-programmer is.
     \begin{itemize}
-    \item layer of abstraction over HW, makes it hard to extract maximal performance
-    \item not workload aware; it optimizes for the general case, but not necessarily our specific case.
+     \item \textbf{Too many abstractions} $\implies$ high-performance is difficult
+      to achieve~\cite{GICEVA:2016:OS_SUPPORT,HALE:2015:NAUTILUS}
     \end{itemize}
- 
-  \item Time-sharing kernel.
+  \item \textbf{General purpose OS}
     \begin{itemize}
-    \item broad interface for generality
-    \item high-level abstractions for programmability
-    \item context-switches, scheduling interrupts, and thread-migration
+    \item many layers of abstraction over HW
+    \item not workload aware; optimized for the general case (lowest common denominator)
+    \item Time-sharing kernel $\implies$ context-switches, scheduling interrupts, and thread-migration
+    % \begin{itemize}
+    % % \item high-level abstractions for programmability
+    % \item $\implies$ context-switches, scheduling interrupts, and thread-migration
+    % \end{itemize}
+    \item Separation of kernel and user space $\implies$ more context switches
     \end{itemize}
 %      use specialized scheduling and memory management abstractions.
  %   \item DBs suffer from over lack of specialization
-    \item Too many abstractions $\implies$ high-performance is difficult to achieve~\cite{GICEVA:2016:OS_SUPPORT}
-  
-  \item Queries composed at runtime.
+  \item \textbf{General purpose DB}
     \begin{itemize}
-    \item Deep function-call trees.
+    \item Interpreted query and expression evaluation  $\implies$
+      \begin{itemize}
+      \item Deep function-call trees
     \item Poor spacial locality in instruction memory
+    \end{itemize}
     \end{itemize}
   \end{itemize}
 
@@ -33,7 +37,7 @@
   \underline{\textbf{Specialized Hybrid Runtimes}~\cite{HALE:2015:NAUTILUS}}
     \begin{itemize}
     \item Kernel + Dataflow Runtime run in ring 0 (unikernel-like).
-    \item Physical resources can be partitioned between general purpose OS and hybrid runtime\cite{KOCOLOSKI:2015:PISCES}.
+    \item Physical resources can be partitioned between general purpose OS and hybrid runtime~\cite{KOCOLOSKI:2015:PISCES}.
       \begin{itemize}
       \item $\implies$ can call general purpose OS where needed.
       \end{itemize}
@@ -56,7 +60,7 @@
       \item Smaller code $\implies$ less instruction cache misses and branches
       \item Specialize data structures to data and query characteristics $\implies$ have the best fit data structure for every situation
       \item Combine code for multiple operators (pipeline) $\implies$ enables cross operator optimizations and avoids function call overhead
-      \item Specialize code for hardware without blowing up code size
+      \item Specialize code for hardware without blow up in code size
       \end{itemize}
     % \item {The app-programmer writes compiled code in the unikernel, giving them unfettered access HW.}
     %   \begin{itemize}
