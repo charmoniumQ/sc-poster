@@ -1,15 +1,13 @@
 \begin{block}{Next Steps}
-    The research is promising, but more work needs to be done. Future work should seek to understand and improve the preformance details such as TLB misses and data cache misses in order to beat a general purpose OS.
+    Preliminary results are promising, but more work needs to be done to get a full picture of the tradeoffs involved with running compiled queries in hybrid runtimes. Future work should seek to understand and improve the preformance details such as TLB misses and data cache misses in order to beat a general purpose OS. Important next steps include:
+% Making the process simpler from the application-programmer's perspective is an active topic of research.
 
-Making the process simpler from the application-programmer's perspective is an active topic of research.
-
-  \begin{itemize}
-  \item \textbf{Further Experiments}:
+  % \begin{itemize}
+  % \item \textbf{Further Experiments}:
     \begin{itemize}
-    \item Implement performance counters (hardware-specific) to measure, e.g., cache misses
-    \item Test parallel implementations of operators
-    \item Test effect of context switches and interrupts that can be controlled in Nautilus, but not in Linux
-  \end{itemize}
+    \item Evaluate parallel implementations of operators
+    \item Evaluate effect of context switches and interrupts that can be controlled in Nautilus, but not in Linux
+  % \end{itemize}
   % \item Test more operators.
   % \item Test parallel operations.
   \end{itemize}

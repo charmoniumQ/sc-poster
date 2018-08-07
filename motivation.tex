@@ -17,7 +17,7 @@
     \end{itemize}
 %      use specialized scheduling and memory management abstractions.
  %   \item DBs suffer from over lack of specialization
-    \item Too many abstractions $\implies$ high-performance is difficult to achieve
+    \item Too many abstractions $\implies$ high-performance is difficult to achieve~\cite{GICEVA:2016:OS_SUPPORT}
   
   \item Queries composed at runtime.
     \begin{itemize}
@@ -30,7 +30,7 @@
     \alert{\textbf{Solution:} Give up flexibility and generality in exchange for performance}
   \end{center}
    
-  \underline{\textbf{Specialized Hybrid Runtimes}}
+  \underline{\textbf{Specialized Hybrid Runtimes}~\cite{HALE:2015:NAUTILUS}}
     \begin{itemize}
     \item Kernel + Dataflow Runtime run in ring 0 (unikernel-like).
     \item Physical resources can be partitioned between general purpose OS and hybrid runtime\cite{KOCOLOSKI:2015:PISCES}.
@@ -49,7 +49,7 @@
       \end{itemize}
     \end{itemize}
   
-    \underline{\textbf{Compiled Query Processing}}
+    \underline{\textbf{Compiled Query Processing}~\cite{SK16,N11}}
     \begin{itemize}
     \item DB engine is specialized for a particular query
       \begin{itemize}
