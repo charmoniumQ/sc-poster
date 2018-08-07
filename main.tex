@@ -207,8 +207,8 @@ innerrightmargin=26pt,innertopmargin=26pt,innerbottommargin=26pt]{overviewbox}
     \begin{column}{\onecolwid}
       \begin{figure}
         \includegraphics[height=30cm]{plots/malloc.png}
-        \label{fig:1}
-        \caption{Performance of allocating memory in chunks comparing linux against a custom  allocator in Nautilus. Using specialization the custom allocator outperforms the highly optimized allocator of linux for smaller sizes by more than an order of magnitude. This demonstrates the potential of specialization - the behaviour of a component can be fine-tuned to workload characteristics.}
+        \label{fig:malloc}
+        \caption{~Performance of allocating memory in chunks comparing linux against a custom  allocator in Nautilus. Using specialization the custom allocator outperforms the highly optimized allocator of linux for smaller sizes by more than an order of magnitude. This demonstrates the potential of specialization - the behaviour of a component can be fine-tuned to workload characteristics.}
       \end{figure}
       \input{hypothesis.tex}
 %      \input{previous_work.tex}
@@ -221,8 +221,7 @@ innerrightmargin=26pt,innertopmargin=26pt,innerbottommargin=26pt]{overviewbox}
 
     % column 3
     \begin{column}{\onecolwid}
-      \input{preliminary_results_I.tex}
-      \input{preliminary_results_II.tex}
+      \input{results.tex}
     \end{column}
 
     % spacer column
