@@ -72,13 +72,13 @@ Our preliminary results demonstrate that, even though this first version of our 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Preliminary Evaluation}
 
-As a preliminary assessment of the potential of our idea we have built an initial testing prototype which consists of manually optimized implementations of common database query operators. We then evaluate the performance of this prototype on a standard Linux distribution and as a hybrid runtime embedded into the Nautilus aerokernel. The purpose of this experiment is to evaluate how the highly specialized implementation of OS functionality like, e.g., memory management, and the more immediate control over OS features provided by hybrid runtimes benefit evaluation of compiled, high-performance query plans (like the ones already produced by modern query compilers used in main memory database systems~\cite{N11}). 
+As a preliminary assessment of the potential of our idea, we have built an initial prototype consisting of optimized implementations of common database query operators. We then evaluate the performance of this prototype on a standard Linux distribution and embedded into the Nautilus aerokernel. The purpose of this experiment is to evaluate how specialized implementations of OS functionality (e.g., memory management) and the immediate control over hardware might benefit evaluation of compiled query plans (like the ones already produced by modern query compilers used in main memory database systems~\cite{N11}). 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Testing Prototype}
 \label{sec:testing-prototype}
 
-We have implemented the prototype in C. It supports several important database operators including selection, projection, and sort.  Here we focus on the implementation of the sort operator, because this  operator is of essential importance in database systems to implement operators like aggregation and joins (merge-join). Our implementation sorts an input table that is stored as columnar chunks. That is each column of the table is stored separately as a collections of large arrays that we coin chunks in this work. Our sort implementation uses counting sort to sort the data within a chunk and merged sort to sort across chunks. We have implemented a row-oriented and a column-oriented variant of this sort algorithm.
+Our prototype supports several important database operators including selection, projection, and sort. Our implementation stores data in columnar chunks: the table is split into chunks of rows, which are stored column-at-a-time. Here we focus on the implementation of the sort operator, because this operator is used to implement other operators like aggregation and joins (merge-join). Our sort implementation uses counting sort to sort the data within a chunk and merged sort to sort across chunks. We have implemented a row-oriented and a column-oriented variant of this sort algorithm.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental Setup}
@@ -86,7 +86,7 @@ We have implemented the prototype in C. It supports several important database o
 
 We ran our prototype on Linux (linux kernel 4.17.6) and as hybrid runtime using Nautilus\footnote{\url{https://github.com/HExSA-Lab/nautilus} - git commit \texttt{2fb4e52816}}~\cite{HALE:2015:NAUTILUS,HALE:2016:HRTHVM}. 
 All experiments were run on a 16-core x86\_64 AMD EPYC machine with 4 NUMA nodes.
-We sort a table consisting of  $256$ chunks varying the number of elements per chunk and the number of columns in the table.
+We sort a table consisting of $256$ chunks varying the number of elements per chunk and the number of columns in the table.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental Results}
@@ -97,20 +97,21 @@ We sort a table consisting of  $256$ chunks varying the number of elements per c
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure*}[t]
   \centering
-  \begin{minipage}{0.32\linewidth}
+  \begin{minipage}{0.31\linewidth}
     \centering
     \includegraphics[width=1\linewidth]{../plots/sort_2d.png}
     \subcaption{Row-oriented sorting for a $128$ column table with 256 chunks}\label{fig:sort2d}
   \end{minipage}
-  \begin{minipage}{0.32\linewidth}
+  \hspace{0.01\linewidth}
+  \begin{minipage}{0.31\linewidth}
     \centering
   \includegraphics[width=1\linewidth]{../plots/sort.png}
-    \subcaption{Column-oriented sort measuring runtime and uncertainty (\todo{2 standard deviations?}) for a fixed chunk size \todo{WHICH ONE}, varying the number of columns}\label{fig:colsort}
+    \subcaption{Column-oriented sort measuring runtime and uncertainty for a fixed chunk size ($2^{13} = 8192$), varying the number of columns}\label{fig:colsort}
   \end{minipage}
-  \begin{minipage}{0.32\linewidth}
+  \begin{minipage}{0.31\linewidth}
     \centering
       \begin{tabular}{l || r | r }
-        \textbf{Kernel}    & TLB misses  & Instruction cache misses \\
+        \textbf{Kernel}    & TLB misses  & Ins. cache misses \\
         \hline\hline
         \textbf{Linux}     & 135,000,000 & 3,030,000 \\
          \textbf{Nautilus} &           1 &   480,000 \\
@@ -124,7 +125,7 @@ We sort a table consisting of  $256$ chunks varying the number of elements per c
 \end{figure*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The results of these experiments are shown in Figure~\ref{fig:perf-eval}.   For larger number of columns and larger chunks, Nautilus outperforms Linux. This is because Nautilus has larger page size and incurs less TLB misses (see Table \ref{fig:cache_miss}).   Furthermore, we see (Figure~\ref{fig:colsort}) that Nautilus performance if much more predictable than Linux. This effect is observed even in configurations where Linux outperforms Nautilus. The main reason for this is that Nautilus does not have scheduling interrupts, so it avoids unpredictable detours which also leads to better cache performance.
+The results of these experiments are shown in Figure~\ref{fig:perf-eval}. For larger number of columns and larger chunks, Nautilus outperforms Linux. This is because Nautilus has larger page size and incurs less TLB misses (see Table \ref{fig:cache_miss}). Furthermore, we see (Figure~\ref{fig:colsort}) that Nautilus performance if much more predictable than Linux. This effect is observed even in configurations where Linux outperforms Nautilus. The main reason for this is that Nautilus does not have scheduling interrupts, so it avoids unpredictable detours which also leads to better cache performance.
 
 
 

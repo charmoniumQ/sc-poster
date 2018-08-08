@@ -17,8 +17,8 @@
       \begin{tabular}{l || r | r }
         \textbf{Kernel}    & TLB misses  & Instruction cache misses \\
         \hline\hline
-        \textbf{Linux}     & 135,000,000 & 3,030,000 \\
-         \textbf{Nautilus} &           1 &   480,000 \\
+        {Linux}            & 135,000,000 & 3,030,000 \\
+        {Nautilus}         &           1 &   480,000 \\
         % I don't have perf-counter data for the following
         % (there is no perf counter)
 %        Page faults              &     & 0 \\
@@ -45,10 +45,10 @@
       \def\arraystretch{1.3}%
       \setlength\tabcolsep{1cm}
       \begin{tabular}{l || r | r }
-        \textbf{Metric}  & \textbf{Linux} & \textbf{Nautilus} \\
+        \textbf{Kernel}    & TLB misses  & Instruction cache misses \\
         \hline\hline
-        TLB misses               & 8,200,000 & 1,100,000 \\
-        Instruction cache misses & 2,500,000 &         1 \\
+        Linux              & 2,500,000 & 8,200,000 \\
+        Nautilus           &         1 & 1,100,000 \\
 
         % I don't have perf-counter data for the following
         % (there is no perf counter)

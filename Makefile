@@ -12,13 +12,16 @@ plots/malloc.png: ./plots/comparing_malloc_performance.py
 	python3 $<
 
 main.pdf: $(TEX_TARGET).tex *.tex $(FIGURES)
-	$(LATEX) $(TEX_TARGET).tex
-
-bib: 
 	$(LATEX) $(TEX_TARGET)
 	$(BIBTEX) $(TEX_TARGET)
 	$(LATEX) $(TEX_TARGET)
 	$(LATEX) $(TEX_TARGET)
+
+summary/summary.pdf: summary/summary.tex
+	$(LATEX) $<
+	$(BIBTEX) $<
+	$(LATEX) $<
+	$(LATEX) $<
 
 clean:
 	rm -f $(TEX_TARGET).pdf *.aux *.log *.out *.bbl *.blg
