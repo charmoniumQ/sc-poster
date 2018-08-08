@@ -1,0 +1,153 @@
+% LaTeX template for the Supercomputing Conference series Artifact Description (AD) appendix  
+% V20180327
+% (C)opyright 2018
+
+% Derived with permission by Michael Heroux (Sandia National Laboratories, St. John's University, MN)
+% from ae-20160509.tex 
+% written by Grigori Fursin (cTuning foundation, France and dividiti, UK) 
+% and Bruce Childers (University of Pittsburgh, USA)
+% (C)opyright 2014-2016
+
+% acmart is available at https://www.acm.org/publications/proceedings-template
+%\documentclass[sigconf,twocolumn]{acmart}
+% IEEETrans is available at https://www.ieee.org/conferences_events/conferences/publishing/templates.html
+\documentclass{IEEEtran}
+\usepackage{hyperref}
+\usepackage{minted}
+\begin{document}
+
+\special{papersize=8.5in,11in}
+
+\appendices
+
+\section{Artifact Description Appendix: ``NautDB: Towards a Hybrid Runtime for Processing Compiled Queries''}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Abstract}
+
+I have written a simple database which I then compile one version on Linux and another into Nautilus (I say \textit{into} because it is compiled inside the Nautilus Aerokernel). My experiments compares the performance of both on an AMD EPYC 7281 server.
+
+\begin{itemize}
+\item The Linux binary is ran on a server running fedora.
+\item The Nautilus binary is ran on the same server, at bare-metal level. Running Nautilus in QEMU or another virtual environment can be an error-detecting step, but it will not have realistic performance.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Description}
+
+\subsubsection{Check-list (artifact meta information)}
+
+{\em Fill in whatever is applicable with some informal keywords and remove the rest}
+
+{\small
+\begin{itemize}
+  \item {\bf Program:} \verb+db-multiverse+
+  \item {\bf Run-time environment:} Linux 4.17.6 (in Fedora Release 28) and Nautilus @ commit \texttt{2fb4e52816}
+  \item {\bf Hardware:} AMD EPYC 7281 16-Core Processor
+  \item {\bf Compiler:} gcc 8.1.1 20180712 (Red Hat 8.1.1-5).
+  \item {\bf Compiler Options:} See the \texttt{Makefile} and the \texttt{nautilus/Makefile} for compile-options.
+  \item {\bf Experiment workflow:}
+    \begin{enumerate}
+    \item Clone
+    \item Compile linux version
+    \item Run and capture output
+    \item Compile Nautilus version
+    \item Boot into Nautilus and capture output
+    \item After modifications, return to step 2
+    \end{enumerate}
+  \item {\bf Experiment customization:} Modify what work the database is doing, the number of chunks, number of columns, chunk-size, and domain-size (domain of the elements in the database).
+  \item {\bf Publicly available:} Yes
+\end{itemize}
+}
+
+\subsubsection{How software can be obtained (if available)}
+
+NautDB can be cloned from this \href{https://github.com/HExSA-Lab/db-multiverse/}{GitHub Repository}.
+
+\subsubsection{Hardware dependencies}
+
+At the time of this writing, Nautilus supports x86\_64, Xeon Phi, and the GEM5 simulator.
+
+In order to gather performance data, I use the CPU-enabled performance counters. These are specific within processor families. I have targetted `AMD EPYC 7281 16-Core Processor', but the code can be modified for other processors as well. If this is not modified, you can still collect cycle-counts.
+
+\subsubsection{Software dependencies}
+
+\texttt{gcc, GNU make, locate, GNU libc (for Linux version)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Installation}
+
+\begin{enumerate}
+\item Download the source code.
+
+\begin{minted}{shell}
+git clone git@github.com:HExSA-Lab/db-multiverse.git
+\end{minted}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experiment workflow}
+
+\begin{enumerate}
+  \item Compile the Linux version
+\begin{minted}{shell}
+make main
+\end{minted}
+
+  \item Run and collect output
+\begin{minted}{shell}
+./main > linux_output
+\end{minted}
+
+  \item Compile Nautilus
+\begin{minted}{shell}
+./scripts/insert_into_nautilus.sh
+make -c nautilus nautilus.bin
+\end{minted}
+
+  \item Boot into Nautilus. If you are using grub, 
+\begin{minted}{shell}
+mv nautilus.bin /boot/nautilus.bin
+echo <<EOF
+menuentry "Nautilus" {
+    # adjust this for your specific hardware
+    set root='hd0,msdos1'
+    multiboot2 /nautilus.bin
+    boot
+}
+EOF >> /etc/grub.d/41_custom
+reboot
+# wait for grub menu
+# select Nautilus from the menu
+# capture output over serial link
+\end{minted}
+
+This is the simplest way of reproducing the Nautilus experiment. However, I recommend using a hardware management tool such as `IPMI' to automate the reboting process. Then you can reboot, select from the Grub menu, and capture the serial remotely. The other scripts in \texttt{./scripts/*} do exactly this. In this case, Expect can be used to automate navigating the Grub menu.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Evaluation and expected result}
+
+The software will output blocks of CSV data wrapped in curly-braces, such as:
+
+\begin{minted}{text}
+file: cool_data.csv {
+x column1 name,column2 name,title
+1,2,
+}
+\end{minted}
+
+The independent variables have a header beginning with `\texttt{x}'.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experiment customization}
+
+Customize \texttt{src/app/main.c} to choose which modules to run. To customize the \texttt{test\_db} module, edit \texttt{src/app/test\_db.c}. The parameters for the database (number of columns, chunk size, number of chunks, domain size) and which operators will be timed can be customized here.
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
