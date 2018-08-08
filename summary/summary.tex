@@ -3,7 +3,6 @@
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
-\usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{hyperref}
@@ -40,7 +39,7 @@ samuel.grayson@utdallas.edu}
 
 \begin{abstract}
 General purpose operating and database system suffer under the load of their generality which makes achieving optimal performance extremely hard, especially on modern hardware.
-The goal of this research is to integrate, for the first time, specialization techniques from the OS community (hybrid runtimes) and DB community (compiled queries) for high-performance query processing on modern hardware. We envision a system called \emph{NautDB}, a hybrid dataflow runtime for executing compiled queries. As a first step towards our goal we evaluate the performance of compiled queries on Linux and run as a \emph{Nautilus} hybrid runtime using a simple prototype.
+The goal of this research is to integrate specialization techniques from the OS community (hybrid runtimes) and DB community (compiled queries) for high-performance query processing on modern hardware. We envision a system called \emph{NautDB}, a hybrid dataflow runtime for executing compiled queries. As a first step towards our goal we evaluate the performance of compiled queries on Linux and run as a \emph{Nautilus} hybrid runtime using a simple prototype.
 Our results demonstrate that combining these specialization techniques has transformative potential for building the next generation (distributed) high-performance query processing systems and big data platforms.
 \end{abstract}
 
@@ -55,7 +54,7 @@ hybrid runtimes, light-weight kernels, compiled query processing, high-performan
   %
   However, the performance of general purpose operating and database systems suffers~\cite{GICEVA:2016:OS_SUPPORT} from being overly generic and hiding implementation details behind multiple layers of abstraction.
   %
-Both communities have worked on achieving better performance on modern hardware without sacrificing ease of use. Specifically, OS researcher have introduced hybrid runtimes~\cite{HALE:2017:MULTIVERSE,HALE:2016:MULTIVERSE,HALE:2015:NAUTILUS,HALE:2016:HRTHVM} as a means to give an application more immediate access to hardware and control over OS behavior while database researchers have studied query compilation to specialize a database execution engine to a particular query.
+Both communities have worked on achieving better performance on modern hardware without sacrificing ease of use. Specifically, OS researchers have introduced hybrid runtimes~\cite{HALE:2017:MULTIVERSE,HALE:2016:MULTIVERSE,HALE:2015:NAUTILUS,HALE:2016:HRTHVM} as a means to give an application more immediate access to hardware and control over OS behavior while database researchers have studied query compilation to specialize a database execution engine to a particular query~\cite{SK16,N11}.
 
 The ultimate goal of this research is to integrate, for the first time, these specialization techniques from the OS community (hybrid runtimes) and DB community (compiled queries) for high-performance query processing.
   %
@@ -73,7 +72,7 @@ Our preliminary results demonstrate that, even though this first version of our 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Preliminary Evaluation}
 
-As a preliminary assessment of the potential of our idea we have build an initial testing prototype which consists of manually optimized implementations of common database query operators. We then evaluate the performance of this prototype on a standard Linux distribution and as a hybrid runtime embedded into the Nautilus aerokernel. The purpose of this experiment is to evaluate how the highly specialized implementation of OS functionality like, e.g., memory management, and the more immediate control over OS features provided by hybrid runtimes benefit evaluation of compiled, high-performance query plans (like the ones produced by modern query compilers used in main memory database systems~\cite{N11}). 
+As a preliminary assessment of the potential of our idea we have built an initial testing prototype which consists of manually optimized implementations of common database query operators. We then evaluate the performance of this prototype on a standard Linux distribution and as a hybrid runtime embedded into the Nautilus aerokernel. The purpose of this experiment is to evaluate how the highly specialized implementation of OS functionality like, e.g., memory management, and the more immediate control over OS features provided by hybrid runtimes benefit evaluation of compiled, high-performance query plans (like the ones already produced by modern query compilers used in main memory database systems~\cite{N11}). 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Testing Prototype}
@@ -85,7 +84,7 @@ We have implemented the prototype in C. It supports several important database o
 \subsection{Experimental Setup}
 \label{sec:experimental-setup}
 
-We ran our prototype on Linux (linux kernel 4.17.6) and as hybrid runtime using Nautilus\footnote{\url{https://github.com/HExSA-Lab/nautilus} - git commit \texttt{9df0e062}}~\cite{HALE:2015:NAUTILUS,HALE:2016:HRTHVM}. 
+We ran our prototype on Linux (linux kernel 4.17.6) and as hybrid runtime using Nautilus\footnote{\url{https://github.com/HExSA-Lab/nautilus} - git commit \texttt{2fb4e52816}}~\cite{HALE:2015:NAUTILUS,HALE:2016:HRTHVM}. 
 All experiments were run on a 16-core x86\_64 AMD EPYC machine with 4 NUMA nodes.
 We sort a table consisting of  $256$ chunks varying the number of elements per chunk and the number of columns in the table.
 
@@ -111,10 +110,10 @@ We sort a table consisting of  $256$ chunks varying the number of elements per c
   \begin{minipage}{0.32\linewidth}
     \centering
       \begin{tabular}{l || r | r }
-        \textbf{Metric}  & \textbf{Linux} & \textbf{Nautilus} \\
+        \textbf{Kernel}    & TLB misses  & Instruction cache misses \\
         \hline\hline
-        TLB misses               & \todo{} & \todo{} \\
-        Instruction cache misses & \todo{} & \todo{}  \\
+        \textbf{Linux}     & 135,000,000 & 3,030,000 \\
+         \textbf{Nautilus} &           1 &   480,000 \\
       \end{tabular}
 
     \subcaption{TLB and cache misses for row-oriented sorting of a $128$ column table with $8192$ elements per chunk}\label{fig:cache_miss}
@@ -157,3 +156,8 @@ This work demonstrated the potential of combining hybrid runtimes with compiled 
 
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
