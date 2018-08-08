@@ -16,7 +16,6 @@ main.pdf: $(TEX_TARGET).tex *.tex $(FIGURES)
 
 bib: 
 	$(LATEX) $(TEX_TARGET)
-	$(LATEX) $(TEX_TARGET)
 	$(BIBTEX) $(TEX_TARGET)
 	$(LATEX) $(TEX_TARGET)
 	$(LATEX) $(TEX_TARGET)

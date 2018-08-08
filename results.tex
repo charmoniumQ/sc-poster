@@ -1,9 +1,10 @@
 \begin{block}{Experimental Results}
  
   \begin{figure}
-    \includegraphics[height=30cm]{plots/sort_2d.png}
-    \todo{change log axis labels to non-log, e.g., $2^3 = 8$ and samce for the legend ($10^x$ to the actual factor).}
-    \caption{~Row-oriented sort in Nautilus and Linux varying the \#columns and chunk-size}
+    \includegraphics[height=27cm]{plots/sort_2d.png}
+    %\todo{change log axis labels to non-log, e.g., $2^3 = 8$ and samce for the legend ($10^x$ to the actual factor).}
+    % Unfortunately I do not have the data that this graph was based on anymore. I cannot regenrate it before the deadline.
+    \caption{~Row-oriented sort in Nautilus and Linux varying the \# of columns and chunk-size}
     \label{fig:sort_2d}
   \end{figure}
 
@@ -14,11 +15,10 @@
       \def\arraystretch{1.3}%
       \setlength\tabcolsep{1cm}
       \begin{tabular}{l || r | r }
-        \textbf{Metric}  & \textbf{Linux} & \textbf{Nautilus} \\
+        \textbf{Kernel}    & TLB misses  & Instruction cache misses \\
         \hline\hline
-        TLB misses               & \todo{} & \todo{} \\
-        Instruction cache misses & \todo{} & \todo{}  \\
-
+        \textbf{Linux}     & 135,000,000 & 3,030,000 \\
+         \textbf{Nautilus} &           1 &   480,000 \\
         % I don't have perf-counter data for the following
         % (there is no perf counter)
 %        Page faults              &     & 0 \\
@@ -32,8 +32,9 @@
   
   \begin{figure}
     \includegraphics[height=30cm]{plots/sort.png}
-    \todo{for plot: change log cols to cols, increase font size}
-    \caption{~Column-oriented sort measuring runtime and uncertainty (\todo{2 standard deviations?}) for a fixed chunk size \todo{WHICH ONE}, varying the number of columns.}
+    % \todo{for plot: change log cols to cols, increase font size}
+    % Unfortunately I do not have the data that this graph was based on anymore. I cannot regenrate it before the deadline.
+    \caption{~Column-oriented sort measuring runtime and uncertainty for a fixed chunk size ($2^13 = 8192$), varying the number of columns.}
     \label{fig:sort}
   \end{figure}
 
@@ -46,8 +47,8 @@
       \begin{tabular}{l || r | r }
         \textbf{Metric}  & \textbf{Linux} & \textbf{Nautilus} \\
         \hline\hline
-        TLB misses               & 8,000,000 & 1,000,000 \\
-        Instruction cache misses & 2,000,000 & 0  \\
+        TLB misses               & 8,200,000 & 1,100,000 \\
+        Instruction cache misses & 2,500,000 &         1 \\
 
         % I don't have perf-counter data for the following
         % (there is no perf counter)

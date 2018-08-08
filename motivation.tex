@@ -6,7 +6,10 @@
     \begin{itemize}
      \item \textbf{Too many abstractions over HW} $\implies$ high-performance is difficult
       to achieve~\cite{GICEVA:2016:OS_SUPPORT,HALE:2015:NAUTILUS}
-    \item not workload aware; optimized for the general case (lowest common denominator)
+    \item Not workload aware; optimized for the general case (lowest common denominator)
+      \begin{itemize}
+      \item memory allocation scheme
+      \end{itemize}
     \item Time-sharing kernel $\implies$ context-switches, scheduling interrupts, and thread-migration
     % \begin{itemize}
     % % \item high-level abstractions for programmability
@@ -21,7 +24,7 @@
     \item Interpreted query and expression evaluation  $\implies$
       \begin{itemize}
       \item Deep function-call trees
-    \item Poor spacial locality in instruction memory
+      \item Poor spacial locality in instruction memory
     \end{itemize}
     \end{itemize}
   \end{itemize}
@@ -52,6 +55,7 @@
     \underline{\textbf{Compiled Query Processing}~\cite{SK16,N11}}
     \begin{itemize}
     \item DB engine is specialized for a particular query
+    \item Can be pre-compiled or JIT-compiled
       \begin{itemize}
       \item Smaller code $\implies$ less instruction cache misses and branches
       \item Specialize data structures to data and query characteristics $\implies$ have the best fit data structure for every situation
