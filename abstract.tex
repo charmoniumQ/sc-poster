@@ -1,17 +1,36 @@
-
-
-
-
 \begin{block}{Overview}
 \begin{overviewbox}
-    \textbf{The goal of this research is to integrate specialization techniques from the OS community
-      (unikernels) and  DB community (compiled queries) for high-performance query processing.}
+  \textbf{Goal: to integrate specialization techniques from the OS
+    community \buzzword{hybrid runtimes} and DB community
+    \buzzword{compiled queries} for high-performance query
+    processing.}
 \end{overviewbox}
+
   \begin{itemize}
-  \item   With the explosion of ``big data'', executing queries on vast amounts of data in parallel has become a bottleneck in many HPC systems.
-  \item   Complex multi-layered abstractions behind generic interfaces in the traditional OS and database software stack are getting in the way of exploiting the characteristics of modern multi-core systems to maximize performance.
-  \item   To mitigate this inefficiency, we envision \textbf{NautDB}, a \textbf{hybrid runtime kernel} (based on the \textbf{Nautilus Aerokernel}~\cite{HALE:2015:NAUTILUS}) for the parallel execution of \textbf{compiled queries}, thus, combining for the first time the concepts of hybrid runtimes and compiled query processing developed by the operating system and database communities.
-  \item   We implement a \textbf{testing prototype} to evaluate the potential performance benefits that can be achieved by our specialized hybrid runtime against a general-purpose runtime.
+
+  \item Executing queries on \buzzword{big data} takes long.
+
+  \item Certain abstractions improve generality, but get in the way of
+    performance.
+
+    % Complex multi-layered abstractions behind generic interfaces in
+    % the traditional OS and database software stack are getting in
+    % the way of exploiting the characteristics of modern multi-core
+    % systems to maximize performance.
+
+  \item We prototype \buzzword{NautDB}: specialized using a
+    \buzzword{hybrid runtime kernel} (based on the \buzzword{Nautilus
+      Aerokernel}~\cite{HALE:2015:NAUTILUS}) and executing
+    pre-compiled building-blocks.
+
+    % for the parallel execution of \buzzword{compiled queries}, thus,
+    % combining for the first time the concepts of hybrid runtimes and
+    % compiled query processing developed by the operating system and
+    % database communities.
+
+  \item We demonstrate performance benefits in certain cases, while
+    maintaining a simple interface for users.
+
   \end{itemize}
 \end{block}
 
