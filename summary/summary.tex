@@ -72,7 +72,9 @@ Our preliminary results demonstrate that, even though this first version of our 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Preliminary Evaluation}
 
-As a preliminary assessment of the potential of our idea, we have built an initial prototype consisting of manually optimized implementations of common database query operators. We then evaluate the performance of this prototype on a standard Linux distribution and embedded into the Nautilus aerokernel~\cite{HALE:2015:NAUTILUS}. The purpose of this experiment is to evaluate how specialized implementations of OS functionality (e.g., memory management) and the immediate control over hardware might benefit evaluation of compiled query plans (like the ones already produced by modern query compilers used in main memory database systems~\cite{N11}).
+As a preliminary assessment of the potential of our idea, we have built an initial prototype consisting of manually optimized implementations of common database query operators.
+We then evaluate the performance of this prototype on a standard Linux distribution and embedded into the Nautilus aerokernel~\cite{HALE:2015:NAUTILUS}.
+The purpose of this experiment is to evaluate how specialized implementations of OS functionality (e.g., memory management) and the immediate control over hardware might benefit evaluation of compiled query plans (like the ones already produced by modern query compilers used in main memory database systems~\cite{N11}).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Testing Prototype}
@@ -126,8 +128,7 @@ We sort a table consisting of $256$ chunks varying the number of elements\footno
 \end{figure*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The results of these experiments are shown in Figure~\ref{fig:perf-eval}. For larger number of columns and larger chunks, Nautilus outperforms Linux. This is because Nautilus has larger page size and incurs less TLB misses (see Table \ref{fig:cache_miss}). Furthermore, note (Figure~\ref{fig:colsort}) that performance in Nautilus is much more predictable than in Linux. This effect is observed even in configurations where Linux outperforms Nautilus. The main reason for this is that Nautilus does not have scheduling interrupts, so it avoids unpredictable detours which also leads to better cache performance.
-
+The results of these experiments are shown in Figure~\ref{fig:perf-eval}. For larger number of columns and larger chunks, Nautilus (with relatively low developer-effort) outperforms Linux. This is because Nautilus has larger page size and incurs less TLB misses (see Table \ref{fig:cache_miss}). Furthermore, note (Figure~\ref{fig:colsort}) that performance in Nautilus is much more predictable than in Linux. This effect is observed even in configurations where Linux outperforms Nautilus. This is because Nautilus does not have scheduling interrupts, so it avoids unpredictable detours which also leads to better cache performance.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -135,9 +136,10 @@ The results of these experiments are shown in Figure~\ref{fig:perf-eval}. For la
 \label{sec:discussion}
 
 
-These preliminary result demonstrate that specialization allows us to tune both the OS and DB ending to a query workload and that compiled queries that consist of highly-specialized code benefit from a hybrid runtime environment.
-Furthermore, hybrid runtimes have much more predictable performance than general purpose OS which will benefit performance for parallelization of our prototype (e.g., using the bulk-synchronous model).
-While our prototype based on the \emph{Nautilus} aerokernel does not outperform Linux on all parameter settings, it consistently shows better TLB and instruction cache behavior as well as more consistent performance (predictability). This is even though the  research prototype implementation of OS features in Nautilus has to compete with a mature industrial strength implementation in Linux that has been optimized by a large number of skilled developers over decades.
+These preliminary result demonstrate that specialization allows us to tune both the OS and DB engine to a query workload and that compiled queries that consist of highly-specialized code benefit from a hybrid runtime environment.
+Furthermore, hybrid runtimes have much more predictable performance than general purpose OSes which will improve performance of bulk-synchronous parallel algorithms.
+Our prototype based on the \emph{Nautilus} aerokernel does outperforms Linux in some parameter settings, despite our comparatively low developer-effort (Linux has been maturing for decades).
+%This is even though the research prototype implementation of OS features in Nautilus has to compete with a mature industrial strength implementation in Linux that has been optimized by a large number of skilled developers over decades.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Our Vision for NautDB}
@@ -150,7 +152,7 @@ As a long term goal, we envision to build \emph{NautDB}, a hybrid dataflow runti
 \section{Conclusions and Future Work}
 \label{sec:concl-future-work}
 
-This work demonstrated the potential of combining hybrid runtimes with compiled query processing. In future work, I plan to evaluate additional database operators, parallel execution of such operators, and evaluate how performance is affected by  context switches and interrupts  that can be controlled in Nautilus, but not in Linux.
+This work demonstrated the potential of combining hybrid runtimes with compiled query processing. In future work, we plan to evaluate additional database operators, parallel execution of such operators, and evaluate how performance is affected by environmental noise from other applications running at the same time.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \bibliographystyle{abbrv}
