@@ -1,12 +1,27 @@
 \begin{block}{Our Vision: \textbf{NautDB}}
+
+  Implement our vision of \textit{NautDB} as a hybrid dataflow engine
+  for compiled queries
+
   \begin{itemize}
-  \item \textbf{NautDB}: Implement our vision of \textit{NautDB} as a
-    hybrid dataflow engine for compiled queries
-  \item \textbf{Architecture}: We envision the system to consist of two major components:
-    \begin{itemize}
-    \item \textbf{Frontend}: The frontend handles communication with the clients of the system, compiles queries into executable tasks for the dataflow backend, and takes care of higher-level scheduling and runtime optimization tasks (e.g., task placement and global planning)
-    \item \textbf{Hybrid Dataflow Runtime for Compiled Code}: The dataflow runtime will benefit from a simple design: threads will be pinned to CPU cores. Cores are either workers that pull tasks from a local (lock-free) queue and execute them or management threads that pass tasks from clients to workers and hand results to clients, push statistics about task execution and resource utilization to clients, and garbage collect task memory.
-    \end{itemize}
+
+  \item \textbf{VMs}: Since NautDB is an application-specific OS, it
+    could be running in its own VM alongisde a general-purpose OS.
+
+  \item \textbf{Frontend}: compiles queries into executable tasks for
+    the dataflow backend and takes care of higher-level scheduling and
+    runtime optimization tasks (e.g., task placement and global
+    planning)
+
+  \item \textbf{Threads}: will be pinned to CPU cores; they will run
+    to completion without interruption.
+
+  \item \textbf{Work distribution}: Cores are either workers that pull
+    tasks from a local (lock-free) queue and execute them or
+    management threads that pass tasks from clients to workers and
+    hand results to clients, push statistics about task execution and
+    resource utilization to clients, and garbage collect task memory.
+
   \end{itemize}
 \end{block}
 

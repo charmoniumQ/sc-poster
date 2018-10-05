@@ -1,21 +1,24 @@
 \begin{block}{Discussion}
 
   \begin{itemize}
-  \item Preliminary experiments demonstrate that:
+
+  \item Specialization allows us to beat Linux with relatively little effort.
+
+  \item We should be able to beat Linux everywhere
     \begin{itemize}
-    \item Specialization allows operations to be tuned for a workload/application
-    \item Compiled queries that consist of highly-specialized code benefit from a hybrid runtime environment
-    \item Hybrid runtimes have much more predictable performance than general purpose OS $\implies$ also will lead to better performance once we go parallel (e.g., bulk-synchronous model)
-    \item Specialization significantly improves cache performance 
+    \item By switching to Linux's algorithm when the workload is suited to it
     \end{itemize}
-  \item While Linux often outperforms our hybrid runtime, we can remedy this situation by introducing complementary specializations (as demonstrated in Fig.~\ref{fig:malloc}q) and choose them based on the workload
+    
+    % just details:
+    % \item Specialization significantly improves cache performance, and this sometimes translates to reducing overall runtime.
+    % \item Compiled queries that consist of highly-specialized code benefit from a hybrid runtime environment
+
+  \item Hybrid runtimes have more predictable performance than general purpose OS
+    \begin{itemize}
+    \item will lead to better performance once we go parallel (e.g., bulk-synchronous model)
+    \end{itemize}
+
   \end{itemize}
-
-  % \todo{
-  %   Since we are specialized we can improve the performance for specific workloads.
-  %   If we are not better, we could switch to different customizations (chosen by the application-programmer).
-  % }
-
 \end{block}
 %%% Local Variables:
 %%% mode: latex

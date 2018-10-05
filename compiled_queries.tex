@@ -1,0 +1,23 @@
+
+\begin{block}{Compiled Query Processing~\cite{SK16,N11}}
+  \begin{itemize}
+    \item DB engine is specialized for a particular query
+    \item Can be pre-compiled or JIT-compiled
+      \begin{itemize}
+      \item Smaller code $\implies$ less i-cache misses and branches
+      \item Specialized data structures
+      \item Combine code for multiple operators (pipeline) $\implies$ optimizations within operators and less func calls
+      \item Specialize code for hardware without blow up in code size
+      \end{itemize}
+    \item The DB-programmer writes compiled code in the unikernel, giving them unfettered access HW.
+      \begin{itemize}
+      \item Compose operators within a block $\implies$ avoid function-call overhead.
+      \item Control HW $\implies$ NUMA-aware code.
+      \end{itemize}
+  \end{itemize}
+\end{block}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:

@@ -1,42 +1,54 @@
-\begin{block}{Testing Prototype and Experimental Setup}
+\begin{block}{NautDB Prototype}
   \begin{itemize}
-    \item \textbf{Workload}
-      \begin{itemize}
-      \item Hand-optimized, in-memory, columnar, chunk-oriented operator
-        implementations
-    \begin{itemize}
-    \item sorting, selection (filter), creating, and freeing tables
-      \end{itemize}
-  \item We report \textbf{sorting} a relation consisting of 256 chunks:
-    \begin{itemize}
-    \item intra chunk: sort data using counting sort
-    \item inter chunk: merge sort
-    \item two sorting variants: row-oriented versus column-oriented
-\end{itemize}
-    % splitting the input into chunks, applying counting sort per chunk, and merge sort to sort across chunks
-\item We vary the number of columns in the table and the size of chunks
-\item We report averages of 10 runes (and variance in some figures)
-  % \end{itemize}
-  % \item Basic array operations: allocate, set all, get all, copy, and free
-  \end{itemize}
-\item \textbf{Parameters and Inputs}
-  \begin{itemize}
-  \item Tables are stored in a column-oriented fashion, the data of a columns is split into 256 chunks - each is an array of data values of a fixed size 
-  \item \textbf{\# of columns}: between 2 and 128
-  \item \textbf{\# of chunks}: 256
-  \item \textbf{chunk size (\# of rows per chunk)}: between 256 ($2^8$) and 16,384 ($2^{14}$)
-  \end{itemize}
-\item \textbf{Compared Configurations}
-    \begin{itemize}
-    \item Hybrid runtime using Nautilus~\cite{HALE:2015:NAUTILUS} versus as application in Linux 
-    \end{itemize}
-  \item \textbf{Setup}
-    \begin{itemize}
-    \item hardware: 16-core x86\_64 AMD EPYC 7281 with 4 NUMA nodes
-    \item OS: linux kernel 4.17.6, Nautilus - git commit \texttt{2fb4e52816}
-    \end{itemize}
+
+  \item Hand-optimized, in-memory, columnar, chunk-oriented operator
+    implementations
+
+  \item Tables are stored in a column-oriented fashion, the data of a
+    columns is split into 256 chunks - each is an array of data values
+    of a fixed size
+
+  \item We tested creating, sorting, selection (filter), creating, and
+    freeing tables
+
+  \item The database server is compiled into Nautilus and invoked on
+    startup (single-application OS)
+
+    % I don't want to get into these details.
+    % They are important for the paper, but not for the poster
+    % The reviewers said we needed more detail on other things, so I
+    % will trade the space.
+    % \item We report \textbf{sorting} a relation consisting of 256 chunks:
+    %   \begin{itemize}
+    %   \item intra chunk: sort data using counting sort
+    %   \item inter chunk: merge sort
+    %   \item two sorting variants: row-oriented versus column-oriented
+    %   \end{itemize}
+    %   splitting the input into chunks, applying counting sort per chunk, and merge sort to sort across chunks
+    % \item Basic array operations: allocate, set all, get all, copy, and free
+
+    %   \begin{itemize}
+
+    %     these parameters are detailed is duplicated in the graph.
+    %     No need for them here.
+    %   \item \textbf{\# of columns}: between 2 and 128
+    %   \item \textbf{\# of chunks}: 256
+    %   \item \textbf{chunk size (\# of rows per chunk)}: between 256 ($2^8$) and 16,384 ($2^{14}$)
+    %   \end{itemize}
+
   \end{itemize}
 \end{block}
+
+\begin{block}{Configuration}
+  \begin{itemize}
+  \item We vary the \underline{number of columns} and the \underline{size of chunks}
+  \item We aggregated over 10 trials
+  \item Hardware: 16-core x86\_64 AMD EPYC 7281 with 4 NUMA nodes
+  \item OS: linux kernel 4.17.6, Nautilus - git commit \texttt{2fb4e52816}
+  \item Nautilus has default configuration with debugging removed and extra devices disabled. It uses 1GB pages.
+  \end{itemize}
+\end{block}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "main"

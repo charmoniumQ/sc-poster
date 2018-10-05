@@ -1,0 +1,21 @@
+\begin{block}{Specialized Hybrid Runtimes~\cite{HALE:2015:NAUTILUS}}
+  \begin{itemize}
+  \item Kernel + Runtime run in ring 0 (unikernel-like) $\implies$ fewer context switches
+  \item Partition physical resources between general purpose OS and hybrid runtime~\cite{KOCOLOSKI:2015:PISCES} $\implies$ can call general purpose OS where needed.
+
+    % Advances in multi-kernel environments allow physical \todo{(cite pisces)} resources to be split between a full-weight kernel and a hybrid runtime.
+    % \item \alert{Unikernel-inspired design prevents the OS from `getting in the way' of the app-programmer.}
+  \item {Unikernel-inspired design gives programmer fine-grained control over \ldots}
+    \begin{itemize}
+    \item Not time-shared $\implies$ No context-switches or thread-migration
+    \item Avoid interrupts $\implies$ Faster and more predictable
+    \item Single address space $\implies$ Huge page-sizes (1Gb) $\implies$ No TLB misses
+    \item Memory allocation $\implies$ Specialize allocator for workload/application (see Fig. \ref{fig:malloc})
+    \end{itemize}
+  \end{itemize}
+\end{block}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:

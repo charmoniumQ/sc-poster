@@ -26,15 +26,12 @@
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % DOC CLASS AND PACKAGES
-\documentclass[final]{beamer}
+\documentclass[final,14pt]{beamer}
 \usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage[framemethod=tikz]{mdframed}
-% \usepackage[font=normalsize, justification=centering]{caption}
-% \DeclareCaptionFont{normalsize}{\normalsize}
-% \captionsetup{font=normalsize}
-
-
+\setbeamerfont{caption}{family=\rmfamily, size=\normalsize}
+%\setbeamerfont{normal text}{family=\rmfamily}%, size=\small}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Use the confposter theme supplied with this template
@@ -43,49 +40,46 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setbeamertemplate{headline}{  
+\setbeamertemplate{headline}{
   \leavevmode
 
   \begin{beamercolorbox}[wd=\paperwidth]{headline}
     \begin{columns}[T]
       \begin{column}{.02\paperwidth}
       \end{column}
-      \begin{column}{.18\paperwidth}
-        \includegraphics[width=10cm,keepaspectratio]{dbgrouplogo.pdf}~%
-        \includegraphics[width=14cm,keepaspectratio]{hexsalablogo.pdf}%
-        \vskip1ex
+      \begin{column}{.16\paperwidth}
+        \includegraphics[width=0.05\paperwidth]{dbgrouplogo.pdf}\hspace{0.005\paperwidth}%
+        \includegraphics[width=0.07\paperwidth]{hexsalablogo.png}%
       \end{column}
-      \begin{column}{.6\paperwidth}
+      \begin{column}{.64\paperwidth}
         \vskip4ex
         \centering
-        \usebeamercolor{title in headline}{\color{fg}\textbf{\veryHuge{\inserttitle}}\\[1ex]}
-        \usebeamercolor{author in headline}{\color{fg}\huge{\insertauthor}\\[1ex]}
-        \usebeamercolor{institute in headline}{\color{fg}\large{\insertinstitute}\\[1ex]}     
-      \end{column}
-            \begin{column}{.02\paperwidth}
+        \usebeamercolor{title in headline}{\color{fg}\textbf{\huge{\inserttitle}}\\[1ex]}
+        \usebeamercolor{author in headline}{\color{fg}\Large{\insertauthor}\\[1ex]}
+        \usebeamercolor{institute in headline}{\color{fg}\large{\insertinstitute}\\[1ex]}
       \end{column}
       \begin{column}{.18\paperwidth}
         \vskip2cm
         \begin{center}
           \raggedright
-          \includegraphics[width=.9\linewidth]{iit_logo.png}
+          \includegraphics[width=.08\paperwidth]{utd_logo.jpg}\hspace{0.005\paperwidth}%
+          \includegraphics[width=.08\paperwidth]{iit_logo.png}%
         \end{center}
         \vskip1.5cm
       \end{column}
+      % \begin{column}{.02\paperwidth}
+      % \end{column}
     \end{columns}
   \end{beamercolorbox}
 
    \vspace{0.5in}
  \hspace{0.5in}\begin{beamercolorbox}[wd=1\linewidth,colsep=0.15cm]{cboxb}\end{beamercolorbox}
- \vspace{-0.5in}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COLORS
-\definecolor{mylinecolor}{rgb}{0.122, 0.435, 0.698}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% COLOR STYLES
+\definecolor{mylinecolor}{rgb}{0.122, 0.435, 0.698}
 % Many more colors are available for use in beamerthemeconfposter.sty
 % \setbeamercolor{block title}{fg=ngreen,bg=white}
 % \setbeamercolor{block body}{fg=black,bg=white}
@@ -100,9 +94,13 @@
 %   (0,0) rectangle (\paperwidth,\paperheight);
 % \end{tikzpicture}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LAYOUT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Use the beamerposter package for laying out the poster (cm)
 % https://github.com/deselaers/latex-beamerposter/blob/master/beamerposter.sty#L138
-\usepackage[scale=1.6, size=custom, width=240, height=120]{beamerposter}
+\usepackage[scale=1.85, size=custom, width=240, height=120]{beamerposter}
 
 % Define the column widths and overall poster size
 
@@ -113,71 +111,34 @@
 % Set threecolwid to be (3*onecolwid)+2*sepwid = 0.708
 \newlength{\sepwid}
 \newlength{\onecolwid}
-\newlength{\twocolwid}
-\newlength{\threecolwid}
 \setlength{\paperwidth}{240cm}
 \setlength{\paperheight}{120cm}
-\setlength{\sepwid}{0.015\paperwidth} % Separation width (white space) between columns
-\setlength{\onecolwid}{0.22\paperwidth} % Width of one column
-\setlength{\twocolwid}{0.625\paperwidth} % Width of two columns
-\setlength{\threecolwid}{0.90\paperwidth} % Width of three columns
+\setlength{\sepwid}{0.01\paperwidth} % Separation width (white space) between columns
+\setlength{\onecolwid}{0.24\paperwidth} % Width of one column
 \setlength{\topmargin}{-1in} % Reduce the top margin size
 
 \addtobeamertemplate{block end}{}{\vspace*{2ex}} % White space under blocks
 \addtobeamertemplate{block alerted end}{}{\vspace*{2ex}} % White space under highlighted (alert) blocks
 
-\setlength{\belowcaptionskip}{2ex} % White space under figures
-\setlength\belowdisplayshortskip{2ex} % White space under equations
+% \setlength{\belowcaptionskip}{2ex} % White space under figures
+% \setlength\belowdisplayshortskip{2ex} % White space under equations
 
 \newcommand{\samelineand}{\qquad}
 
 % http://mirror.hmc.edu/ctan/macros/latex/contrib/enumitem/enumitem.pdf
 \setlist[itemize]{label=\textbullet,leftmargin=1.5cm}
-\setlist[itemize,1]{itemsep=0.8cm}
-\setlist[itemize,2]{itemsep=0.2cm}
+\setlist[itemize,1]{itemsep=0.8cm,itemsep=0.8cm}
+\setlist[itemize,2]{itemsep=0.2cm,itemsep=0.5cm}
 
 \newcommand{\todo}[1]{\textbf{\textcolor{red}{TODO: #1}}}
 \newcommand{\buzzword}[1]{\textbf{#1}}
 \newcommand{\insight}[1]{\alert{#1}}
 
 \title{\emph{NautDB}: Towards a Hybrid Runtime for Processing Compiled Queries}
-
-% \author{\texorpdfstring{
-% \begin{columns}
-%   \column{0.33\linewidth}
-%   \centering
-
-%   \textbf{Samuel Grayson}\\[0.75ex]
-%   Computer Science Department\\
-%   University of Texas at Dallas\\
-%       %   samuel.grayson@utdallas.edu
-
-%   \column{0.33\linewidth}
-%   \centering
-%   \textbf{Kyle Hale}\\[0.5ex]
-%   Computer Science Department\\
-%   Illinois Institute of Technology\\
-%       %   khale@cs.iit.edu
-
-%   \column{0.3\linewidth}
-%   \centering
-%   \textbf{Boris Glavic}\\[0.75ex]
-%   Computer Science Department\\
-%   Illinois Institute of Technology\\
-%       %   bglavic@cs.iit.edu
-% \end{columns}
-% }{}}
-
 \author{Samuel Grayson (sag150430@utdallas.edu)}
 \institute{University of Texas at Dallas}
-% \author{Samuel Grayson\textsuperscript{1}, Kyle
-%   Hale\textsuperscript{2}, Boris Glavic\textsuperscript{2}}
-% % TODO: put emails on here
-% \institute{1 University of Texas at Dallas, 2 Illinois Insitute of Technology}
 
 \graphicspath{{./imgs/}}
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -193,46 +154,37 @@ innerrightmargin=26pt,innertopmargin=26pt,innerbottommargin=26pt]{overviewbox}
 
   \begin{columns}[t]
 
-    % spacer column
     \begin{column}{\sepwid}
     \end{column}
 
-    % column 1
     \begin{column}{\onecolwid}
       \input{abstract.tex}
-      \input{motivation.tex}
+      % \input{status_quo.tex}
+      \input{hrt.tex}
+      \input{compiled_queries.tex}
     \end{column}
 
-    % spacer column
     \begin{column}{\sepwid}
     \end{column}
 
-    % column 2
     \begin{column}{\onecolwid}
-      \begin{figure}
-        \includegraphics[height=30cm]{plots/malloc.png}
-        \label{fig:malloc}
-        \caption{~Performance of allocating memory in chunks comparing linux against a custom  allocator in Nautilus. Using specialization the custom allocator outperforms the highly optimized allocator of linux for smaller sizes by more than an order of magnitude. This demonstrates the potential of specialization - the behaviour of a component can be fine-tuned to workload characteristics.}
-      \end{figure}
+      \input{malloc_plot.tex}
       \input{hypothesis.tex}
-%      \input{previous_work.tex}
+      % \input{previous_work.tex}
       \input{testing_prototype.tex}
     \end{column}
 
-    % spacer column
     \begin{column}{\sepwid}
     \end{column}
 
-    % column 3
     \begin{column}{\onecolwid}
+      \vspace{-1cm}
       \input{results.tex}
     \end{column}
 
-    % spacer column
     \begin{column}{\sepwid}
     \end{column}
 
-    % column 4
     \begin{column}{\onecolwid}
       \input{discussion.tex}
       %\input{conclusion.tex}
@@ -240,7 +192,9 @@ innerrightmargin=26pt,innertopmargin=26pt,innerbottommargin=26pt]{overviewbox}
       \input{vision.tex}
       \input{references.tex}
     \end{column}
-    
+
+    \begin{column}{\sepwid}
+    \end{column}
   \end{columns}
   
 \end{frame}

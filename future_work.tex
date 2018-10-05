@@ -1,16 +1,12 @@
 \begin{block}{Next Steps}
-    Preliminary results are promising, but more work needs to be done to get a full picture of the tradeoffs involved with running compiled queries in hybrid runtimes. Future work should seek to understand and improve the performance details such as TLB misses and data cache misses in order to beat a general purpose OS. Important next steps include:
-% Making the process simpler from the application-programmer's perspective is an active topic of research.
 
-  % \begin{itemize}
-  % \item \textbf{Further Experiments}:
-    \begin{itemize}
-    \item Evaluate parallel implementations of operators
-    \item Evaluate effect of context switches and interrupts that can be controlled in Nautilus, but not in Linux
-  % \end{itemize}
-  % \item Test more operators.
-  % \item Test parallel operations.
+  \begin{itemize}
+  \item Borrow algorithms from Linux where they outperform the existing Nautilus algorithms
+  \item Make the development process simpler for the user
+  \item Evaluate parallel implementations of operators
+  \item Evaluate effect of noise due to other applications running (in a partitioned VM environment)
   \end{itemize}
+
 \end{block}
 
 %%% Local Variables:
