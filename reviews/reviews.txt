@@ -1,0 +1,46 @@
+========================================
+Review of spost133s1 by Reviewer 1
+========================================
+
+The author presents an idea to integrate hybrid runtimes with compiled queries in order to achieve better performance, which is actually observed in the results of the presented work. As such, this has to be considered a successful project and I found it interesting to read.
+
+The submitted paper itself is well written and shows the potential of this student. Obviously, some more information on the technical details are needed.
+
+Unfortunately, the poster is a bit confusing for me. Rather than formatting the content in a way that it can be displayed as a poster, it shows the contents of the paper with lots of text, in fact way too much text. One could simply take the four columns, put them after each other, and done is the paper. This is not the intention of a poster. A poster should first grasp the viewers interest, secondly lead him or her through the contents of your work, and then finally leave a memory of important new knowledge in the brain of those seeing the poster. With the current version, I don't think a reader will go through the poster until the end, because it is not as exciting as it should be.
+
+Please do not misunderstand: I believe the work is interesting, but in order to find its audience, it is necessary to present them in a way such that readers can actually take something home.
+
+========================================
+Review of spost133s1 by Reviewer 2
+========================================
+
+The authors describe a hybrid runtime for executing certain database functions and evaluate it for performance and predictability. The hybrid runtimes have much better predictability and better performance in cases for which they have been specialized.
+
+This work attempts to expand on the results produced from various hybrid runtime systems showing some of the potential advantages of such specialized runtimes and kernels. The results are promising for some set of parameters, its a bit surprising they couldn't get better results given some of the innate advantages.
+
+A deficiency is that they only reference one form of hybrid runtime in their bib, there are several others including ones that have been applied to database workloads (Have a look at Libra work from IBM several years ago - a predecessor to the FusedOS HPC work which was a predecessor to Intel's mOS).
+
+========================================
+Review of spost133s1 by Reviewer 3
+========================================
+
+The author explores the advantages of combining the use of optimization techniques from the DB communities and hybrid runtimes (Nautilus) on query processing.
+
+The work is interesting and well done.
+
+I believe that the poster would benefit from a better description of the implementation of the dataset operators (maybe including a graphical representation). The poster summary mentions using specialization techniques from the DB community (compiled queries), but does not provide details on their implementation.
+
+It would also be helpful to have more information about Nautilus (e.g., page size used and other settings that might affect performance). In general, more in depth discussion on the results would be helpful.
+
+The poster is well organized, but a bit too dense in text.
+
+As a plus, the submission includes reproducibility information.
+
+
+========================================
+Review of spost133s1 by Reviewer 4
+========================================
+
+This poster proposes the a Hybrid runtime for processing compiled queries to integrate specialization techniques from the OS community (hybrid runtimes) and DB community (compiled queries) for high-performance query processing on modern hardware. The authors presents some results by a simple prototype of hand-optimized, in-memory, columnar, chunk-oriented operator implementations based on the Nautilus Aerokernel.
+The idea is very interesting and promising, but the weakness is that the implementation and evaluation is still on a simple prototype.
+My question is that in the next real implementation, the compiled code is compiled and loaded as a kernel module into operating system. The authors should describe more the information the Nautilus Aerokernel for the information to the audience.
